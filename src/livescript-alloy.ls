@@ -52,4 +52,8 @@ class Application
   test: ->
     console.log 'Testing Util structure ...'
 
+  compile: ->
+    app.start!
+    app.compiler.all!
+
 module.exports = new Application
