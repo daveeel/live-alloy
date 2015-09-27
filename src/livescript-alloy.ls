@@ -22,38 +22,62 @@ class Application
     @titanium = null
 
     @program
-      .version('0.0.1')
-      .usage('[COMMAND] [OPTIONS]')
-      .option('-p, --platform [platform]', '(watch) When done, run titanium on `platform`')
-      .option('-d, --directory [dirname]', 'Set source directory (default `src/`)')
+      .version \0.0.1
+      .usage '[COMMAND] [OPTIONS]'
+      .option '-p, --platform [platform]', '(watch) When done, run titanium on `platform`'
+      .option '-d, --directory [dirname]', 'Set source directory (default `src/`)'
 
     @program.command \test
       .alias \t
       .description 'livescript-alloy test'
       .action @test
 
-    @program.command('compile')
-      .alias('c')
-      .description('Just compile.')
-      .action(@compile)
+    @program.command \compile
+      .alias \c
+      .description 'Just compile.'
+      .action @compile
 
-    @program.command('new')
-      .alias('n')
-      .description('Setup the lazy-alloy directory structure.')
-      .action(@setup)
+    @program.command \new
+      .alias \n
+      .description 'Setup the lazy-alloy directory structure.'
+      .action @setup
 
-    @program.command('generate [type] [name]')
-      .alias('g')
-      .description('Generate a new (lazy-)alloy type such as a controller.')
-      .action(@generate)
+    @program.command 'generate [type] [name]'
+      .alias \g
+      .description 'Generate a new (lazy-)alloy type such as a controller.'
+      .action @generate
 
-    @program.parse(process.argv)
+    @program.parse process.argv
 
   test: ->
     console.log 'Testing Util structure ...'
 
+  start: ->
+
   compile: ->
     app.start!
     app.compiler.all!
+
+  build: (platform = app.program.platform)->
+
+  watch: ->
+
+  setup: ->
+    app.start!
+    new Generator!setup app.subfolder
+
+  generate: (type, name)->
+
+  ensureType: ->
+
+  ensureName: (i, type)->
+
+  startGenerator: (name)->
+
+  getFileType: (path)->
+
+class Compiler
+
+class Generator
 
 module.exports = new Application
