@@ -2,7 +2,7 @@ fs = require("fs")
 path = require("path")
 match = require("match-files")
 promptly = require("promptly")
-coffee = require("coffee-script")
+livescript = require("livescript")
 jade = require("jade")
 sty = require('sty')
 app = null
@@ -175,15 +175,15 @@ class Application
     return {type: "view", fromTo: ["jade", "xml"]} if inpath ".jade"
     return {type: "widgets/view", fromTo: ["jade", "xml"]} if inpath "widgets/view"
 
-    return null unless inpath ".coffee"
+    return null unless inpath ".ls"
 
-    return {type: "style", fromTo: ["coffee", "tss"]} if inpath "styles/"
-    return {type: "alloy", fromTo: ["coffee", "js"]} if inpath "alloy.coffee"
-    return {type: "controller", fromTo: ["coffee", "js"]} if inpath "controllers/"
-    return {type: "model", fromTo: ["coffee", "js"]} if inpath "models/"
-    return {type: "library", fromTo: ["coffee", "js"]} if inpath "lib/"
-    return {type: "widgets/style", fromTo: ["coffee", "tss"]} if inpath "widgets/style"
-    return {type: "widgets/controller", fromTo: ["coffee", "js"]} if inpath "widgets/controller"
+    return {type: "style", fromTo: ["ls", "tss"]} if inpath "styles/"
+    return {type: "alloy", fromTo: ["ls", "js"]} if inpath "alloy.ls"
+    return {type: "controller", fromTo: ["ls", "js"]} if inpath "controllers/"
+    return {type: "model", fromTo: ["ls", "js"]} if inpath "models/"
+    return {type: "library", fromTo: ["ls", "js"]} if inpath "lib/"
+    return {type: "widgets/style", fromTo: ["ls", "tss"]} if inpath "widgets/style"
+    return {type: "widgets/controller", fromTo: ["ls", "js"]} if inpath "widgets/controller"
 
 class Compiler
   logger: console
@@ -193,26 +193,26 @@ class Compiler
     @process "views/", "jade", "xml"
 
   controllers: ->
-    @process "controllers/", "coffee", "js"
+    @process "controllers/", "ls", "js"
 
   models: ->
-    @process "models/", "coffee", "js"
+    @process "models/", "ls", "js"
 
   styles: ->
-    @process "styles/", "coffee", "tss"
+    @process "styles/", "ls", "tss"
 
   widgets: ->
     widgets = fs.readdirSync "#{@subfolder}/widgets"
     for widget in widgets
       @process "widgets/#{widget}/views/", "jade", "xml"
-      @process "widgets/#{widget}/styles/", "coffee", "tss"
-      @process "widgets/#{widget}/controllers/", "coffee", "js"
+      @process "widgets/#{widget}/styles/", "ls", "tss"
+      @process "widgets/#{widget}/controllers/", "ls", "js"
 
   lib: ->
-    @process "lib/", "coffee", "js"
+    @process "lib/", "ls", "js"
 
   alloy: ->
-    @process "./alloy.coffee", "coffee", "js"
+    @process "./alloy.ls", "ls", "js"
 
   all: ->
     @views()
@@ -275,7 +275,7 @@ class Compiler
         """, ""
 
     js: (data) ->
-      coffee.compile data.toString(), {bare: true}
+      livescript.compile data.toString(), {bare: true}
 
     json: (data) ->
       data
@@ -330,7 +330,7 @@ class Generator
 
   createController = (name) ->
     console.debug "Creating controller #{name}"
-    touch app.subfolder + 'controllers/' + name + '.coffee'
+    touch app.subfolder + 'controllers/' + name + '.ls'
     createView name
 
   createView = (name) ->
@@ -340,11 +340,11 @@ class Generator
 
   createStyle = (name) ->
     console.debug "Building style #{name}"
-    touch app.subfolder + 'styles/' + name + '.coffee'
+    touch app.subfolder + 'styles/' + name + '.ls'
 
   createModel = (name) ->
     console.debug "Building model #{name}"
-    touch app.subfolder + 'models/' + name + '.coffee'
+    touch app.subfolder + 'models/' + name + '.ls'
 
   createWidget = (name) ->
     console.debug "Creating widget #{name}"
@@ -353,13 +353,13 @@ class Generator
     mkdir app.subfolder + 'widgets/' + name + '/controllers/'
     mkdir app.subfolder + 'widgets/' + name + '/views/'
     mkdir app.subfolder + 'widgets/' + name + '/styles/'
-    touch app.subfolder + 'widgets/' + name + '/controllers/widget.coffee'
+    touch app.subfolder + 'widgets/' + name + '/controllers/widget.ls'
     touch app.subfolder + 'widgets/' + name + '/views/widget.jade'
-    touch app.subfolder + 'widgets/' + name + '/styles/widget.coffee'
+    touch app.subfolder + 'widgets/' + name + '/styles/widget.ls'
 
   createLibrary = (name) ->
     console.debug "Creating library #{name}"
-    touch app.subfolder + 'lib/' + name + '.coffee'
+    touch app.subfolder + 'lib/' + name + '.ls'
 
   not_yet_implemented = ->
     console.info "This generator hasn't been built into lazy-alloy yet. Please help us out by building it in:"

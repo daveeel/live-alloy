@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
 //thin wrapper
-require('../live-alloy.js');
+require('../livescript-alloy.js');

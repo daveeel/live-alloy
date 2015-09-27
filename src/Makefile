@@ -1,2 +1,2 @@
 all:
-	coffee -b -c  -o ../ lazy-alloy.coffee
+	coffee -b -c  -o ../ livescript-alloy.coffee

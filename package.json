@@ -1,16 +1,16 @@
 {
-  "name": "live-alloy",
+  "name": "livescript-alloy",
   "version": "0.0.1",
   "description": "Write Alloy apps in livescript, jade and livescript-css",
-  "main": "live-alloy.js",
+  "main": "livescript-alloy.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "git@github.com:daveeel/live-alloy.git",
+  "repository": "git@github.com:daveeel/livescript-alloy.git",
   "author": "daveeel",
   "license": "BSD",
   "bin": {
-    "livealloy": "./bin/live-alloy"
+    "livealloy": "./bin/livealloy"
   },
   "dependencies": {
     "livescript": "~1.4.0",

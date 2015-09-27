@@ -1,30 +1,30 @@
-lazy-alloy
+livescript-alloy
 ==========
 
-`lazy-alloy` is a CoffeeScript & Jade preprocessor for [Titanium Alloy Framework](http://projects.appcelerator.com/alloy/docs/Alloy-bootstrap/index.html).
+`livescript-alloy` is a LiveScript & Jade preprocessor for [Titanium Alloy Framework](http://projects.appcelerator.com/alloy/docs/Alloy-bootstrap/index.html).
+
+`livescript-alloy` is a fork of [lazy-alloy](https://github.com/itzaks/lazy-alloy) which uses CoffeeScript
+
 
 ##What does it do?
 
-It makes you write a tiny bit less code. Perhaps also a bit more readable (¿¿¿) code as well.
+It makes you write less code & optionally more functional. See [LiveScript Official Website](http://livescript.net) for more insight.
 
 Compile from sourcefile | To alloy readable output
 ------------ | -------------
-`src/controllers/{{name}}.coffee` | `app/controllers/{{name}}.js`
-`src/styles/{{name}}.coffee` | `app/styles/{{name}}.tss`
+`src/controllers/{{name}}.ls` | `app/controllers/{{name}}.js`
+`src/styles/{{name}}.ls` | `app/styles/{{name}}.tss`
 `src/views/{{name}}.jade` | `app/views/{{name}}.xml`
-`src/models/{{name}}.coffee` | `app/models/{{name}}.js`
-`src/lib/{{name}}.coffee` | `app/lib/{{name}}.js`
+`src/models/{{name}}.ls` | `app/models/{{name}}.js`
+`src/lib/{{name}}.ls` | `app/lib/{{name}}.js`
 
 Also, it will compile your widgets from src/widgets stored in the following directories.
 
-From | To 
+From | To
 ------------ | -------------
-`src/widgets/{{name}}/controllers/*.coffee` | `app/widgets/{{name}}/controllers/*.js` 
-`src/widgets/{{name}}/styles/*.coffee` | `app/widgets/{{name}}/styles/*.tss`
-`src/widgets/{{name}}/views/*.jade` | `app/widgets/{{name}}/views/*.xml` 
-
-Inspired by [coffee-alloy](https://github.com/brantyoung/coffee-alloy) but eventually grew out of its box. Feel free to improve.
-
+`src/widgets/{{name}}/controllers/*.ls` | `app/widgets/{{name}}/controllers/*.js`
+`src/widgets/{{name}}/styles/*.ls` | `app/widgets/{{name}}/styles/*.tss`
+`src/widgets/{{name}}/views/*.jade` | `app/widgets/{{name}}/views/*.xml`
 
 ## Usage
 
@@ -37,10 +37,10 @@ Inspired by [coffee-alloy](https://github.com/brantyoung/coffee-alloy) but event
 
 ### Installation
 1. Install [Titanium Alloy Framework](http://projects.appcelerator.com/alloy/docs/Alloy-bootstrap/index.html).
-2. `npm install -g lazy-alloy`
+2. `npm install -g livescript-alloy`
 
-### Note regarding the \*.coffee –> \*.tss conversion
-The files need to be valid coffee-script objects; thus the first line of these files needs to be a variable assignment like the following
+### Note regarding the \*.ls –> \*.tss conversion
+The files need to be valid livescript objects; thus the first line of these files needs to be a variable assignment like the following
 
     tss =
 	  ".container":
@@ -51,7 +51,7 @@ The files need to be valid coffee-script objects; thus the first line of these f
 		height: Ti.UI.SIZE
 		color: "#fff"
 
-      
+
 Its output will look like this:
 
     ".container": {
@@ -66,15 +66,15 @@ Its output will look like this:
 Perhaps something like *stylus* would be a better fit for this kind of job. Feel free to help us improve this section!
 
 ###Options
-    Usage: lazyalloy [COMMAND] [OPTIONS]
+    Usage: livealloy [COMMAND] [OPTIONS]
 
     Commands:
 
       compile                Just compile.
       watch                  Watch file changes & compile.
       build <platform>       Run titanium on `platform`
-      new                    Setup the lazy-alloy directory structure.
-      generate <type> <name> Generate a new (lazy-)alloy type such as a controller.
+      new                    Setup the livescript-alloy directory structure.
+      generate <type> <name> Generate a new (livescript-)alloy type such as a controller.
 
     Options:
 
@@ -82,7 +82,3 @@ Perhaps something like *stylus* would be a better fit for this kind of job. Feel
       -V, --version              output the version number
       -p, --platform [platform]  (watch) When done, run titanium on `platform`
       -d, --directory [dirname]  Set source directory (default `src/`)
-     	
-
-
-![AFRICA!](http://24.media.tumblr.com/60efb9b1b8da24b3250c1ab21232c2b8/tumblr_mhtwirmVV51r8sj1to1_500.jpg)
