@@ -1,19 +1,19 @@
 {
-  "name": "lazy-alloy",
-  "version": "0.0.7",
-  "description": "Write Alloy apps in coffee-script, jade and coffee-css",
-  "main": "lazy-alloy.js",
+  "name": "live-alloy",
+  "version": "0.0.1",
+  "description": "Write Alloy apps in livescript, jade and livescript-css",
+  "main": "live-alloy.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "git@github.com:vastness/lazy-alloy.git",
-  "author": "zzzwww",
+  "repository": "git@github.com:daveeel/live-alloy.git",
+  "author": "daveeel",
   "license": "BSD",
   "bin": {
-    "lazyalloy": "./bin/lazy-alloy"
+    "livealloy": "./bin/live-alloy"
   },
   "dependencies": {
-    "coffee-script": "~1.8.0",
+    "livescript": "~1.4.0",
     "commander": "2.3.0",
     "jade": "~1.5.0",
     "match-files": "0.1.1",
