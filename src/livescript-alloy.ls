@@ -54,24 +54,77 @@ class Application
 
   start: ->
     @subfolder = if @program.directory
-      @program.directory += '/' unless
-      @program.directory.charAt(subfolder.length-1) == '/'
+      @program.directory += '/' unless @program.directory.charAt(subfolder.length-1) == '/'
     else
       'src/'
-    @compiler = new compiler @subfolder
+    @compiler = new Compiler @subfolder
 
   compile: ->
     app.start!
     app.compiler.all!
 
   build: (platform = app.program.platform)->
+    app.start!
+    spawn = require \child_process .spawn
+    exec = require \child_process .exec
 
-  watch: ->
+    if app.titanium isnt null
+      console.info 'stopping titanium ...'
+      app.titanium.kill!
+
+    alloy = exec 'alloy compile' (error, stdout, stderr) ->
+      console.debug stdout if stdout
+      console.log stderr if stderr
+
+    alloy.on \exit (code) ->
+      console.log "alloy stopped with code #{ code }"
+
+      if code isnt 1
+        console.info 'starting titanium ...'
+        @titanium = spawn \titanium [\build \-p platform]
+        @titanium.stdout.on \data (data) ->
+          console.log "titanium: #{ data }"
+        @titanium.stderr.on \data (data) ->
+          console.log "titanium: #{ data }"
+        @titanium.on \exit (code) ->
+          console.log "titanium exited with code #{ code }"
+
+  watch: !->
+    app.start!
+    watchr = require \watchr
+
+    console.info 'Waiting for file change ...'
+
+    watchr.watch do
+      ignoreHiddenFiles: true
+      paths: [directory]
+      listeners:
+        error: (err) ->
+          console.log "an error occured:", err
+
+        change: (changeType, filePath, fileCurrentStat, filePreviousStat) ->
+          return unless changeType in ["create", "update"]
+
+          #only compile correct files
+          file = getFileType filePath
+          return unless file
+
+          app.compiler.files [filePath], file.fromTo[0], file.fromTo[1]
+
+          app.build() if app.program.platform
+
+    next: (err, watchers) ->
+      if err
+        return console.log "watching everything failed with error" err
+      else
+        console.debug 'Waiting for file change ...'
+
 
   setup: ->
     app.start!
     new Generator!setup app.subfolder
 
+  # TODO: continue
   generate: (type, name)->
 
   ensureType: ->

@@ -3,12 +3,12 @@ livescript-alloy
 
 `livescript-alloy` is a LiveScript & Jade preprocessor for [Titanium Alloy Framework](http://projects.appcelerator.com/alloy/docs/Alloy-bootstrap/index.html).
 
-`livescript-alloy` is a fork of [lazy-alloy](https://github.com/itzaks/lazy-alloy) which uses CoffeeScript
+This utility is a fork from [lazy-alloy](https://github.com/itzaks/lazy-alloy) which uses CoffeeScript
 
 
-##What does it do?
+## Why?
 
-It makes you write less code & optionally more functional. See [LiveScript Official Website](http://livescript.net) for more insight.
+It makes you write less code so that your could focus more on getting things done faster instead of syntax details. Optionally, LiveScript allows more functional thinking than CoffeeScript. See [LiveScript Official Website](http://livescript.net) for more insight.
 
 Compile from sourcefile | To alloy readable output
 ------------ | -------------
