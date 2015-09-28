@@ -53,6 +53,12 @@ class Application
     console.log 'Testing Util structure ...'
 
   start: ->
+    @subfolder = if @program.directory
+      @program.directory += '/' unless
+      @program.directory.charAt(subfolder.length-1) == '/'
+    else
+      'src/'
+    @compiler = new compiler @subfolder
 
   compile: ->
     app.start!
@@ -79,5 +85,18 @@ class Application
 class Compiler
 
 class Generator
+  setup: (subfolder) ->
+    console.info "Setting up folder structure at #{subfolder}"
+    mkdir subfolder
+    mkdir subfolder+'views'
+    mkdir subfolder+'styles'
+    mkdir subfolder+'controllers'
+    mkdir subfolder+'widgets'
+    mkdir subfolder+'lib'
+    console.debug 'Setup complete.'
+    process.exit()
+
+  generate: (type, name) ->
+
 
 module.exports = new Application
